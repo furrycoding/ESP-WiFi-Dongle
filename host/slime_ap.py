@@ -58,7 +58,6 @@ class SerialProxy:
         crc = crc16(data, crc)
         
         b = bytearray()
-        b += b'PKT\n'
         b += PREAMBLE
         b += header
         b += data
