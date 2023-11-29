@@ -1,4 +1,4 @@
-import socket, struct, time
+import socket, struct, time, sys
 import threading
 import selectors
 from collections import deque
@@ -200,12 +200,19 @@ class SerialProxy:
         self._port_to_remote_addr.clear()
 
 
+args = sys.argv[1:]
+if len(args) < 1:
+    print('Usage: python ./slime_ap.py <serial port>')
+    exit()
+
+port = args[0]
+
 threads = []
 
 ser = serial.Serial()
 proxy = None
 try:
-    ser.port = 'COM10'
+    ser.port = port
     ser.baudrate = 115200 * 10
     ser.open()
     assert ser.is_open
