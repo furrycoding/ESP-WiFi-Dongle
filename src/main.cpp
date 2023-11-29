@@ -177,7 +177,8 @@ void update_wifi2serial(WiFiUDP* udp) {
         size_t frameLen = 0;
         uint8_t* ptr = framing.make_frame((uint8_t*)incomingPacket, writeLen, ipLowerByte, localPort, remotePort, &frameLen);
 
-        Serial.write(ptr, frameLen);
+        if (ptr != NULL)
+            Serial.write(ptr, frameLen);
         optimistic_yield(100);
 
         activity = true;
